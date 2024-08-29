@@ -1,5 +1,9 @@
 package com.bobocode.basics;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 /**
  * {@link Box} is a container class that can store a value of any given type. Using Object as a field type
  * is flexible, because we can store anything we want there. But it is not safe, because it requires runtime casting
@@ -7,18 +11,8 @@ package com.bobocode.basics;
  * <p>
  * todo: refactor this class so it uses generic type "T" and run {@link com.bobocode.basics.BoxTest} to verify it
  */
-public class Box {
-    private Object value;
-
-    public Box(Object value) {
-        this.value = value;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
+@Data
+@AllArgsConstructor
+public class Box<T> {
+    private T value;
 }
