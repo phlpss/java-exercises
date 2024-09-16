@@ -1,10 +1,11 @@
 package test;
 
 import main.Order;
-import main.Product;
 import main.OrderManagementSystem;
+import main.Product;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -69,21 +70,38 @@ public class OrderManagementSystemTest {
     }
 
     @Test
-    public void testTotalAmountOfEachProduct() {
+    public void testTotalAmountOfEachProduct() throws InvocationTargetException {
         Map<String, Integer> totalProducts = OrderManagementSystem.totalAmountOfEachProduct(orders);
 
-        assertEquals(4, totalProducts.get("Laptop"));
-        assertEquals(5, totalProducts.get("Keyboard"));
-        assertEquals(6, totalProducts.get("SSD"));
+        int laptop = totalProducts.get("Laptop");
+        int keyboard = totalProducts.get("Keyboard");
+        int ssd = totalProducts.get("SSD");
+
+        assertEquals(4, laptop);
+        assertEquals(5, keyboard);
+        assertEquals(6, ssd);
     }
+
+    // 003 = 175
+    // 004 = 255
+    // 005 = 700
+    // 001 = 1050
+    // 006 = 1150
+    // 002 = 1900
 
     @Test
     public void testSortOrdersByTotalProductsValue() {
         List<Order> sortedOrders = OrderManagementSystem.sortOrdersByTotalProductsValue(orders);
 
-        assertEquals("003", sortedOrders.getFirst().getOrderNumber());
-        assertEquals("006", sortedOrders.getLast().getOrderNumber());
+        List<String> actualOrderNumbers = sortedOrders.stream()
+                .map(Order::getOrderNumber)
+                .toList();
+
+        List<String> expectedOrderNumbers = Arrays.asList("003", "004", "005", "001", "006", "002");
+
+        assertTrue(expectedOrderNumbers.equals(actualOrderNumbers));
     }
+
 
     @Test
     public void testGetUniqueProducts() {
@@ -99,6 +117,6 @@ public class OrderManagementSystemTest {
         Optional<Order> maxOrder = OrderManagementSystem.getMaxValueOrder(orders);
 
         assertTrue(maxOrder.isPresent());
-        assertEquals("006", maxOrder.get().getOrderNumber());
+        assertTrue("002".equals(maxOrder.get().getOrderNumber()));
     }
 }
