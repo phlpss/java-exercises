@@ -61,15 +61,19 @@ public class OrderManagementSystem {
         );
     }
 
+    public static Set<Product> getUniqueProducts(List<Order> orders) {
+        return new HashSet<>(orders.stream()
+                .flatMap(order -> order.getProducts().stream())
+                .collect(Collectors.toMap(
+                        Product::getName,
+                        product -> product,
+                        (existing, replacement) -> replacement)) // Merge function to keep the replacement
+                .values());
+    }
+
     public static Optional<Order> getMaxValueOrder(List<Order> orders) {
         return orders.stream()
                 .max(Comparator.comparingDouble(Order::getTotalOrderValue));
-    }
-
-    public static Set<Product> getUniqueProducts(List<Order> orders) {
-        return orders.stream()
-                .flatMap(order -> order.getProducts().stream())
-                .collect(Collectors.toSet());
     }
 
     public static List<Order> ordersByCustomerName(List<Order> orders, String customerName) {
