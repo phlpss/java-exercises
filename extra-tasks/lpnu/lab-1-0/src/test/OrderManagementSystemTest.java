@@ -5,7 +5,6 @@ import main.OrderManagementSystem;
 import main.Product;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -70,7 +69,7 @@ public class OrderManagementSystemTest {
     }
 
     @Test
-    public void testTotalAmountOfEachProduct() throws InvocationTargetException {
+    public void testTotalAmountOfEachProduct() {
         Map<String, Integer> totalProducts = OrderManagementSystem.totalAmountOfEachProduct(orders);
 
         int laptop = totalProducts.get("Laptop");
@@ -81,13 +80,6 @@ public class OrderManagementSystemTest {
         assertEquals(5, keyboard);
         assertEquals(6, ssd);
     }
-
-    // 003 = 175
-    // 004 = 255
-    // 005 = 700
-    // 001 = 1050
-    // 006 = 1150
-    // 002 = 1900
 
     @Test
     public void testSortOrdersByTotalProductsValue() {
