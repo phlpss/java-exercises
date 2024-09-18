@@ -14,12 +14,13 @@ import java.util.Arrays;
  */
 
 public class MergeSortedArray {
-    public static void main(String[] args) {
-        merge(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
-        merge(new int[]{7, 8, 9, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
-        merge(new int[]{1}, 1, new int[]{}, 0);
-        merge(new int[]{0}, 0, new int[]{1}, 1);
-    }
+//    public static void main(String[] args) {
+//        merge(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
+//        merge(new int[]{7, 8, 9, 0, 0, 0}, 3, new int[]{2, 5, 6}, 3);
+//        merge(new int[]{1}, 1, new int[]{}, 0);
+//        merge(new int[]{0}, 0, new int[]{1}, 1);
+//    }
+
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
         var mi = m - 1;
         var ni = n - 1;
